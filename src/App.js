@@ -1,0 +1,119 @@
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { useSwipeable } from "react-swipeable";
+import "./App.css";
+import RupeeNote from "./assets/500_rupee_note.JPG";
+import BAG from "./assets/BAG.jpeg.jpg";
+import BallPen from "./assets/Ball Pen.jpg";
+import CottonShawl from "./assets/Cotton Shawl.jpg";
+import EyeGlasses from "./assets/Eye glasses.jpg";
+import Ford from "./assets/Ford Ecosport.jpg";
+import Guitar from "./assets/guitar.jpg";
+import HeroHonda from "./assets/HeroHondaSplendor.jpg";
+import IDCard from "./assets/ID Card.jpg";
+import KeyChain from "./assets/KeyChain.jpg";
+import Paracetamol from "./assets/Paracetamol tablets.jpeg";
+import RubiksCube from "./assets/Rubiks Cube.jpg";
+import SeasonBall from "./assets/Season Ball.jpg.JPG";
+import Shoes from "./assets/Shoes.jpg";
+import SilverRing from "./assets/Silver ring .PNG";
+import TissusePaper from "./assets/Tissuepaper .jpeg";
+import Wallet from "./assets/Wallet.jpg";
+import WaterBottle from "./assets/Water bottle.jpg";
+import WristWatch from "./assets/Wristwatch.jpg";
+
+function App() {
+  const [index, setIndex] = useState(0);
+
+  const imageObjects = [
+    { name: "Rupee Note", url: RupeeNote },
+    { name: "BAG", url: BAG },
+    { name: "Ball Pen", url: BallPen },
+    { name: "Cotton Shawl", url: CottonShawl },
+    { name: "Eye Glasses", url: EyeGlasses },
+    { name: "Ford", url: Ford },
+    { name: "Guitar", url: Guitar },
+    { name: "Hero Honda", url: HeroHonda },
+    { name: "ID Card", url: IDCard },
+    { name: "KeyChain", url: KeyChain },
+    { name: "Paracetamol", url: Paracetamol },
+    { name: "Rubik's Cube", url: RubiksCube },
+    { name: "Season Ball", url: SeasonBall },
+    { name: "Shoes", url: Shoes },
+    { name: "Silver Ring", url: SilverRing },
+    { name: "Tissue Paper", url: TissusePaper },
+    { name: "Wallet", url: Wallet },
+    { name: "Water Bottle", url: WaterBottle },
+    { name: "Wrist Watch", url: WristWatch }
+  ];
+
+  const nextImage = () => {
+    setIndex((prevIndex) => (prevIndex + 1) % imageObjects.length);
+  };
+
+  const prevImage = () => {
+    setIndex((prevIndex) =>
+        prevIndex === 0 ? imageObjects.length - 1 : prevIndex - 1
+    );
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "ArrowRight" || event.key === "d") {
+        nextImage();
+      } else if (event.key === "ArrowLeft" || event.key === "a") {
+        prevImage();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
+  const handlers = useSwipeable({
+    onSwipedLeft: () => nextImage(),
+    onSwipedRight: () => prevImage(),
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true
+  });
+
+  return (
+      <>
+        <div className="heading">STS Objects</div>
+
+        <div className="slider" {...handlers}>
+          <motion.div
+              className="slider-inner"
+              key={imageObjects[index].url}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.2 }}
+              transition={{ duration: 0.8, ease: "easeInOut" }}
+          >
+            <img
+                src={imageObjects[index].url}
+                alt="Slider Image"
+                className="slider-image"
+            />
+            <div
+                className="overlay-text"
+                style={{
+                  color: imageObjects[index].name === "Rupee Note" ? "green" : "#fff",
+                  backgroundColor: imageObjects[index].name === "Rupee Note" ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.7)"
+                }}
+            >
+              {imageObjects[index].name}
+              {imageObjects[index].name === "Rupee Note" && " (Final object)"}
+            </div>
+          </motion.div>
+          <button onClick={prevImage} className="prev-button">‹</button>
+          <button onClick={nextImage} className="next-button">›</button>
+        </div>
+      </>
+  );
+}
+
+export default App;
