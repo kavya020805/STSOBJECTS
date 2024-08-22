@@ -74,14 +74,19 @@ body {
   transform: translateX(-50%);
   font-size: 1.5rem;
   font-weight: bold;
-  background-color: rgba(0,0,0,0.5);
+  color: black;
   padding: 10px;
+  margin-top: 100px;
   border-radius: 5px;
   text-align: center;
   font-family: 'YourChosenFontFamily', sans-serif; /* Change to your preferred font family */
 }
 
 @media (max-width: 768px) {
+  .heading{
+    font-size: 1.7rem;
+  }
+
   .prev-button,
   .next-button {
     font-size: 30px;
