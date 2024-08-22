@@ -24,6 +24,7 @@ import WristWatch from "./assets/Wristwatch.jpg";
 
 function App() {
   const [index, setIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   const imageObjects = [
     { name: "500 Rupee Note (Final Object)", url: RupeeNote },
@@ -47,31 +48,32 @@ function App() {
     { name: "Wrist Watch", url: WristWatch }
   ];
 
+  useEffect(() => {
+    const preloadImages = () => {
+      imageObjects.forEach((imageObject) => {
+        const img = new Image();
+        img.src = imageObject.url;
+      });
+    };
+
+    preloadImages();
+  }, []);
+
   const nextImage = () => {
+    setIsLoading(true);
     setIndex((prevIndex) => (prevIndex + 1) % imageObjects.length);
   };
 
   const prevImage = () => {
+    setIsLoading(true);
     setIndex((prevIndex) =>
         prevIndex === 0 ? imageObjects.length - 1 : prevIndex - 1
     );
   };
 
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.key === "ArrowRight" || event.key === "d") {
-        nextImage();
-      } else if (event.key === "ArrowLeft" || event.key === "a") {
-        prevImage();
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, []);
+  const handleImageLoad = () => {
+    setIsLoading(false);
+  };
 
   const handlers = useSwipeable({
     onSwipedLeft: () => nextImage(),
@@ -85,24 +87,35 @@ function App() {
         <div className="heading">STS Objects</div>
 
         <div className="slider" {...handlers}>
-              <img
-                  src={imageObjects[index].url}
-                  alt={imageObjects[index].name}
-                  className="slider-image"
-              />
-              <div
-                  className="overlay-text"
-                  style={{
-                    color:
-                        imageObjects[index].name === "500 Rupee Note (Final Object)" ? "green" : "#fff",
-                    backgroundColor:
-                        imageObjects[index].name === "500 Rupee Note (Final Object)"
-                            ? "rgba(255,255,255,0.7)"
-                            : "rgba(0,0,0,0.7)"
-                  }}
-              >
-                {imageObjects[index].name}
+          <AnimatePresence initial={false}>
+            <motion.img
+                key={index}
+                src={imageObjects[index].url}
+                alt={imageObjects[index].name}
+                className="slider-image"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                onLoad={handleImageLoad}
+            />
+          </AnimatePresence>
+          {isLoading && (
+              <div className="loading-overlay">
+                Loading...
               </div>
+          )}
+          <div
+              className="overlay-text"
+              style={{
+                color:
+                    imageObjects[index].name === "500 Rupee Note (Final Object)" ? "green" : "#fff",
+                backgroundColor:
+                    imageObjects[index].name === "500 Rupee Note (Final Object)"
+                        ? "rgba(255,255,255,0.7)"
+                        : "rgba(0,0,0,0.7)"
+              }}
+          >
+            {imageObjects[index].name}
+          </div>
           <button onClick={prevImage} className="prev-button">
             ‹
           </button>
