@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useSwipeable } from "react-swipeable";
 import "./App.css";
 import RupeeNote from "./assets/500_rupee_note.JPG";
@@ -26,7 +26,7 @@ function App() {
   const [index, setIndex] = useState(0);
 
   const imageObjects = [
-    { name: "Rupee Note", url: RupeeNote },
+    { name: "500 Rupee Note (Final Object)", url: RupeeNote },
     { name: "BAG", url: BAG },
     { name: "Ball Pen", url: BallPen },
     { name: "Cotton Shawl", url: CottonShawl },
@@ -85,32 +85,30 @@ function App() {
         <div className="heading">STS Objects</div>
 
         <div className="slider" {...handlers}>
-          <motion.div
-              className="slider-inner"
-              key={imageObjects[index].url}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.2 }}
-              transition={{ duration: 0.8, ease: "easeInOut" }}
-          >
-            <img
-                src={imageObjects[index].url}
-                alt="Slider Image"
-                className="slider-image"
-            />
-            <div
-                className="overlay-text"
-                style={{
-                  color: imageObjects[index].name === "Rupee Note" ? "green" : "#fff",
-                  backgroundColor: imageObjects[index].name === "Rupee Note" ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.7)"
-                }}
-            >
-              {imageObjects[index].name}
-              {imageObjects[index].name === "Rupee Note" && " (Final object)"}
-            </div>
-          </motion.div>
-          <button onClick={prevImage} className="prev-button">‹</button>
-          <button onClick={nextImage} className="next-button">›</button>
+              <img
+                  src={imageObjects[index].url}
+                  alt={imageObjects[index].name}
+                  className="slider-image"
+              />
+              <div
+                  className="overlay-text"
+                  style={{
+                    color:
+                        imageObjects[index].name === "500 Rupee Note (Final Object)" ? "green" : "#fff",
+                    backgroundColor:
+                        imageObjects[index].name === "500 Rupee Note (Final Object)"
+                            ? "rgba(255,255,255,0.7)"
+                            : "rgba(0,0,0,0.7)"
+                  }}
+              >
+                {imageObjects[index].name}
+              </div>
+          <button onClick={prevImage} className="prev-button">
+            ‹
+          </button>
+          <button onClick={nextImage} className="next-button">
+            ›
+          </button>
         </div>
       </>
   );

@@ -96,4 +96,15 @@ body {
     max-width: 90%;
     max-height: 90%;
   }
+
+  .slider {
+    margin-top: 80px;
+    position: relative;
+    width: 100vw;
+    height: calc(100vh - 130px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+  }
 }
