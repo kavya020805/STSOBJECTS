@@ -105,7 +105,7 @@ function App() {
                 className="slider-image"
                 initial={{opacity: 0}}
                 animate={{opacity: 1}}
-                transition={{duration: 1}}
+                transition={{duration: 1.5}}
             />
 
           </AnimatePresence>
