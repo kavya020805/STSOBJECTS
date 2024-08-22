@@ -24,7 +24,6 @@ import WristWatch from "./assets/Wristwatch.jpg";
 
 function App() {
   const [index, setIndex] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
 
   const imageObjects = [
     { name: "500 Rupee Note (Final Object)", url: RupeeNote },
@@ -60,19 +59,13 @@ function App() {
   }, []);
 
   const nextImage = () => {
-    setIsLoading(true);
     setIndex((prevIndex) => (prevIndex + 1) % imageObjects.length);
   };
 
   const prevImage = () => {
-    setIsLoading(true);
     setIndex((prevIndex) =>
         prevIndex === 0 ? imageObjects.length - 1 : prevIndex - 1
     );
-  };
-
-  const handleImageLoad = () => {
-    setIsLoading(false);
   };
 
   const handlers = useSwipeable({
@@ -82,9 +75,26 @@ function App() {
     trackMouse: true
   });
 
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "ArrowLeft") {
+        prevImage();
+      } else if (event.key === "ArrowRight") {
+        nextImage();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
+
   return (
       <>
-        <div className="heading">STS Objects</div>
+        <div className="heading">STS Objects (Group-03)</div>
 
         <div className="slider" {...handlers}>
           <AnimatePresence initial={false}>
@@ -93,16 +103,12 @@ function App() {
                 src={imageObjects[index].url}
                 alt={imageObjects[index].name}
                 className="slider-image"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                onLoad={handleImageLoad}
+                initial={{opacity: 0}}
+                animate={{opacity: 1}}
+                transition={{duration: 1}}
             />
+
           </AnimatePresence>
-          {isLoading && (
-              <div className="loading-overlay">
-                Loading...
-              </div>
-          )}
           <div
               className="overlay-text"
               style={{
