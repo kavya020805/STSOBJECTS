@@ -20,7 +20,7 @@ import SilverRing from "./assets/Silver ring .PNG";
 import TissusePaper from "./assets/Tissuepaper .jpeg";
 import Wallet from "./assets/Wallet.jpg";
 import WaterBottle from "./assets/Water bottle.jpg";
-import WristWatch from "./assets/Wristwatch.jpg";
+import WristWatch from "./assets/Wristwatch (1).jpg";
 
 function App() {
   const [index, setIndex] = useState(0);
