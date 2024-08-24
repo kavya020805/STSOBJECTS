@@ -26,25 +26,25 @@ function App() {
   const [index, setIndex] = useState(0);
 
   const imageObjects = [
-    { name: "500 Rupee Note (Final Object)", url: RupeeNote },
-    { name: "BAG", url: BAG },
-    { name: "Ball Pen", url: BallPen },
-    { name: "Cotton Shawl", url: CottonShawl },
-    { name: "Eye Glasses", url: EyeGlasses },
-    { name: "Ford Ecosport", url: Ford },
-    { name: "Guitar", url: Guitar },
-    { name: "Hero Honda Splendor", url: HeroHonda },
-    { name: "ID Card", url: IDCard },
-    { name: "KeyChain", url: KeyChain },
-    { name: "Paracetamol", url: Paracetamol },
-    { name: "Rubik's Cube", url: RubiksCube },
-    { name: "Season Ball", url: SeasonBall },
-    { name: "Shoes", url: Shoes },
-    { name: "Silver Ring", url: SilverRing },
-    { name: "Tissue Paper", url: TissusePaper },
-    { name: "Wallet", url: Wallet },
-    { name: "Water Bottle", url: WaterBottle },
-    { name: "Wrist Watch", url: WristWatch }
+    { name: "1) 500 Rupee Note (Final Object)", url: RupeeNote },
+    { name: "2) BAG", url: BAG },
+    { name: "3) Ball Pen", url: BallPen },
+    { name: "4) Cotton Shawl", url: CottonShawl },
+    { name: "5) Eye Glasses", url: EyeGlasses },
+    { name: "6) Ford Ecosport", url: Ford },
+    { name: "7) Guitar", url: Guitar },
+    { name: "8) Hero Honda Splendor", url: HeroHonda },
+    { name: "9) ID Card", url: IDCard },
+    { name: "10) KeyChain", url: KeyChain },
+    { name: "11) Paracetamol", url: Paracetamol },
+    { name: "12) Rubik's Cube", url: RubiksCube },
+    { name: "13) Season Ball", url: SeasonBall },
+    { name: "14) Shoes", url: Shoes },
+    { name: "15) Silver Ring", url: SilverRing },
+    { name: "16) Tissue Paper", url: TissusePaper },
+    { name: "17) Wallet", url: Wallet },
+    { name: "18) Water Bottle", url: WaterBottle },
+    { name: "19) Wrist Watch", url: WristWatch }
   ];
 
   useEffect(() => {
