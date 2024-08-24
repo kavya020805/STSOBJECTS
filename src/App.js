@@ -113,9 +113,9 @@ function App() {
               className="overlay-text"
               style={{
                 color:
-                    imageObjects[index].name === "500 Rupee Note (Final Object)" ? "green" : "#000",
+                    imageObjects[index].name === "1) 500 Rupee Note (Final Object)" ? "green" : "#000",
                 backgroundColor:
-                    imageObjects[index].name === "500 Rupee Note (Final Object)"
+                    imageObjects[index].name === "1) 500 Rupee Note (Final Object)"
                         ? "rgba(255,255,255,0.7)"
                         : "rgba(255,255,255,0.7)"
               }}
